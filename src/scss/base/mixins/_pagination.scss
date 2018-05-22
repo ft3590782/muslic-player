@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+// Pagination
+// 规定 li 下面只有 a 或是 span
+
+@mixin pagination-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) {
+    > li {
+        > a,
+        > span {
+            padding: $padding-vertical $padding-horizontal;
+            font-size: $font-size;
+            line-height: $line-height;
+            cursor: pointer;
+        }
+        &:first-child {
+            > a,
+            > span {
+                @include left-radius($border-radius);
+            }
+        }
+        &:last-child {
+            > a,
+            > span {
+                @include right-radius($border-radius);
+            }
+        }
+    }
+}

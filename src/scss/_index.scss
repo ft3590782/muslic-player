@@ -1,0 +1,128 @@
+body,
+html {
+	@include square(100%);
+	overflow-x: hidden;
+	overflow-y: auto; // -webkit-overflow-scrolling: touch;
+	font-size: 14px;
+	background-color: $bg-color;
+}
+
+input[type=text],
+input[type=email],
+input[type=num],
+input[type=password],
+input[type=tel] {
+	background: transparent;
+	border: 1px solid #DDDDDD;
+	padding: 8px 10px;
+	border-radius: 6px;
+	outline: none;
+}
+
+.user-select-enable {
+	-webkit-touch-callout: default !important;
+	user-select: inherit !important;
+}
+
+.user-select-disable,
+.ndclick {
+	cursor: pointer;
+	outline: none !important;
+	-webkit-touch-callout: none !important;
+	user-select: none !important;
+}
+
+.wrap-all {
+	@include square(100%);
+	overflow-x: hidden;
+	overflow-y: auto;
+	color: $brand-primary;
+}
+
+@for $i from 1 to 10 {
+	.m-b-#{$i * 10} {
+		margin-bottom: #{$i * 10}px;
+	}
+	.p-b-#{$i * 10} {
+		padding-bottom: #{$i * 10}px;
+	}
+	.m-t-#{$i * 10} {
+		margin-top: #{$i * 10}px;
+	}
+	.p-t-#{$i * 10} {
+		padding-top: #{$i * 10}px;
+	}
+}
+
+@for $i from 1 to 5 {
+	.p-l-#{$i * 5} {
+		padding-left: #{$i * 5}px;
+	}
+	.m-l-#{$i * 5} {
+		margin-left: #{$i * 5}px;
+	}
+	.p-r-#{$i * 5} {
+		padding-right: #{$i * 5}px;
+	}
+	.m-r-#{$i * 5} {
+		margin-right: #{$i * 5}px;
+	}
+	.m-t-#{$i * 5} {
+		margin-top: #{$i * 5}px;
+	}
+	.m-b-#{$i * 5} {
+		margin-bottom: #{$i * 5}px;
+	}
+}
+
+.row {
+	.col-1 {
+		@include flex(25px);
+		&.big {
+			@include flex(80px);
+		}
+		&.small {
+			@include flex(30px);
+		}
+		&.middle {
+			@include flex(50px);
+		}
+		&.bbig {
+			@include flex(120px);
+			&.icon-wrap {
+				height: 20px;
+				line-height: 20px;
+				display: flex;
+				align-items: center;
+				i.iconfont {
+					margin-right: 10px;
+				}
+			}
+		}
+		&.large {
+			@include flex(150px);
+		}
+	}
+	.col-2 {
+		@include flex-a;
+	}
+	.col-3 {
+		@include flex(50px);
+		padding: 10px 0;
+		&.big {
+			@include flex(80px);
+		}
+		&.bbig {
+			@include flex(120px);
+		}
+		&.bbbig {
+			@include flex(160px);
+		}
+	}
+	.col-click {
+		cursor: pointer;
+	}
+	&.row-click {
+		cursor: pointer;
+	}
+}

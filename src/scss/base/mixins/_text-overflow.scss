@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+// 文字一行显示，溢出部分使用 ··· 表示
+
+@mixin text-inline() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

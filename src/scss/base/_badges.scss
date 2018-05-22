@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+//
+// Badges
+
+// 基本样式
+// 放在在按钮旁的体型条数
+
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    margin: 0 0 0 4px;
+    font-size: $font-size-small;
+    font-weight: $badge-font-weight;
+    color: $badge-color;
+    line-height: $badge-line-height;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-align: center;
+    background-color: $badge-bg;
+    border-radius: $badge-border-radius;
+
+    // 没有内容就隐藏
+    &:empty {
+        display: none;
+    }
+
+    // 修正在 btn 中显示问题
+    .btn & {
+        position: relative;
+        top: -1px;
+    }
+
+    .btn-xs &,
+    .btn-group-xs > .btn & {
+        top: 0;
+        padding: 1px 5px;
+    }
+
+}

@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+// 1. 设置文字颜色
+// 2. 设置高度时，同时设置行高
+
+@mixin text-emphasis-variant($parent, $color) {
+    #{$parent} {
+        color: $color;
+    }
+    a#{$parent}:hover,
+    a#{$parent}:focus {
+        color: darken($color, 10%);
+    }
+}
+
+@mixin heightText($height){
+    line-height: $height;
+    height: $height;
+}

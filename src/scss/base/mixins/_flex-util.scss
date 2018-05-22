@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+// 方便使用 flex 布局
+// 添加高/宽度，主要是 translate 的过渡动画需要有高/宽度
+
+@mixin flex($length){
+    flex: 0 0 $length;
+    width: $length;
+}
+
+@mixin flex-a{
+    flex: auto;
+    width: 100px;
+}
+
+@mixin flex-h($length){
+    flex: 0 0 $length;
+    height: $length;
+}
+
+@mixin flex-h-a{
+    flex: auto;
+    height: 100px;
+}
+
+@mixin flex-inline{
+    flex: 0 0 auto;
+}

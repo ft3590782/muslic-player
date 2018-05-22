@@ -1,0 +1,153 @@
+@charset "utf-8";
+
+// 下拉框相关
+
+// 三角
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: $caret-width-base dashed;
+    border-right: $caret-width-base solid transparent;
+    border-left: $caret-width-base solid transparent;
+}
+
+// 最外层的包裹 (div)
+.dropup,
+.dropdown {
+    position: relative;
+}
+
+// 取消掉点击下拉框是按钮的外边框
+.dropdown-toggle:focus {
+    outline: 0;
+}
+
+// 列表 (ul)
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none; // 默认不可见，当需要是显示
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0; // override default ul
+    list-style: none;
+    font-size: $font-size-base;
+    text-align: left; // 确保是左对齐的，避免被父级影响
+    background-color: $dropdown-bg;
+    border: 1px solid $dropdown-border;
+    border-radius: $border-radius-base;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    background-clip: padding-box;
+
+    // 分隔线
+    .divider {
+        @include nav-divider($dropdown-divider-bg,$line-height-computed);
+    }
+
+    // li 下面的 a
+    > li > a {
+        display: block;
+        padding: 3px 20px;
+        clear: both;
+        font-weight: normal;
+        line-height: $line-height-base;
+        color: $dropdown-link-color;
+        white-space: nowrap; // 防止换行
+    }
+}
+
+// Hover/Focus 状态
+.dropdown-menu > li > a {
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        color: $dropdown-link-hover-color;
+        background-color: $dropdown-link-hover-bg;
+    }
+}
+
+// Active 状态
+.dropdown-menu > .active > a {
+    &,
+    &:hover,
+    &:focus {
+        color: $dropdown-link-active-color;
+        text-decoration: none;
+        outline: 0;
+        background-color: $dropdown-link-active-bg;
+    }
+}
+
+// Disabled 状态
+
+.dropdown-menu > .disabled > a {
+    &,
+    &:hover,
+    &:focus {
+        color: $dropdown-link-disabled-color;
+    }
+
+    // 覆盖 hover/focus 状态
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        background-color: transparent;
+        background-image: none; // Remove CSS gradient
+        cursor: not-allowed;
+    }
+}
+
+// dropdown 的显示状态
+.open {
+    > .dropdown-menu {
+        display: block;
+    }
+
+    > a {
+        outline: 0;
+    }
+}
+
+// dropdown 的位置处理
+.dropdown-menu-right {
+    left: auto;
+    right: 0;
+}
+
+// 默认值可不用
+.dropdown-menu-left {
+    left: 0;
+    right: auto;
+}
+
+// 下拉选项的标题
+.dropdown-header {
+    display: block;
+    padding: 3px 20px;
+    font-size: $font-size-small;
+    line-height: $line-height-base;
+    color: $dropdown-header-color;
+    white-space: nowrap; // as with > li > a
+}
+
+// drop-up 样式，向上展开
+
+.dropup{
+    // 箭头向上
+    .caret {
+        border-top: 0;
+        border-bottom: $caret-width-base dashed;
+        content: "";
+    }
+    // 调整位置
+    .dropdown-menu {
+        top: auto;
+        bottom: 100%;
+        margin-bottom: 2px;
+    }
+}

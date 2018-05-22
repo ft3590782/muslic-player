@@ -1,0 +1,236 @@
+@charset "utf-8";
+// 相关默认变量
+// 一些颜色
+$gray-base: #000 !default;
+$gray-darker: lighten($gray-base, 13.5%) !default; // #222
+$gray-dark: lighten($gray-base, 20%) !default; // #333
+$gray: lighten($gray-base, 33.5%) !default; // #555
+$gray-light: lighten($gray-base, 46.7%) !default; // #777
+$gray-lighter: lighten($gray-base, 93.5%) !default; // #eee
+$brand-primary: #333 !default; //
+$brand-sub: rgba(00, 15, 29, 0.6) !default;
+$brand-gray: #999 !default;
+$brand-placeholder: #999 !default;
+$brand-success: #5cb85c !default;
+$brand-info: #1790FF !default;
+$brand-warning: #F5A623 !default;
+$brand-danger: #ff5a60 !default;
+$brand-enable:#1790FF !default;
+$brand-qcode:#3B99FC !default;
+$brand-delete:#E32626 !default;
+$brand-btn-add:#919EA9;
+$brand-sub-dark:rgba(00, 15, 29, 0.6);
+$brand-placeholder-dark:#A4ACB3;
+$block-bg-color:#F7F9FC;
+// 字体颜色
+$font-main:#1A1A1F;
+$font-sub:#666;
+$font-light:#999;
+//背景颜色
+$bg-color:#f6f6f6;
+// border的颜色
+$border-color:#eee;
+$input-border-color:rgba(00, 21, 40, 0.2);
+//== 在 Scaffolding 中用到的
+//** Background color for `<body>`.
+$body-bg: #fff !default;
+//** Global text color on `<body>`.
+$text-color: $gray-dark !default;
+//** Global textual link color.
+$link-color: $brand-primary !default;
+//** Link hover color set via `darken()` function.
+$link-hover-color: darken($link-color, 15%) !default;
+//** Link hover decoration.
+$link-hover-decoration: underline !default;
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+$font-family-base: Helvetica Neue,
+Helvetica,
+PingFang SC,
+Hiragino Sans GB,
+Microsoft YaHei,
+\\5FAE\8F6F\96C5\9ED1,
+Arial,
+sans-serif;
+$font-family-monospace: Consolas,
+Menlo,
+Monaco,
+"Courier New",
+monospace !default;
+$font-size-base: 14px !default;
+$font-size-large: ceil(($font-size-base * 1.25)) !default; // ~18px
+$font-size-small: ceil(($font-size-base * 0.85)) !default; // ~12px
+$font-size-h1: floor(($font-size-base * 2.6)) !default; // ~36px
+$font-size-h2: floor(($font-size-base * 2.15)) !default; // ~30px
+$font-size-h3: ceil(($font-size-base * 1.7)) !default; // ~24px
+$font-size-h4: ceil(($font-size-base * 1.25)) !default; // ~18px
+$font-size-h5: $font-size-base !default;
+$font-size-h6: ceil(($font-size-base * 0.85)) !default; // ~12px
+//** Unit-less `line-height` for use in components like buttons.
+$line-height-base: 1.428571429 !default; // 20/14
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+$line-height-computed: floor(($font-size-base * $line-height-base)) !default; // ~20px
+//** By default, this inherits from the `<body>`.
+$headings-font-family: inherit !default;
+$headings-font-weight: 500 !default;
+$headings-line-height: 1.1 !default;
+$headings-color: inherit !default;
+//== Components
+//
+//## Define common padding and border radius sizes and more. Values based on 14px text and 1.428 line-height (~20px to start).
+$padding-base-vertical: 6px !default;
+$padding-base-horizontal: 12px !default;
+$padding-large-vertical: 10px !default;
+$padding-large-horizontal: 16px !default;
+$padding-small-vertical: 5px !default;
+$padding-small-horizontal: 10px !default;
+$padding-xs-vertical: 1px !default;
+$padding-xs-horizontal: 5px !default;
+$line-height-large: 1.3333333 !default;
+$line-height-small: 1.5 !default;
+$border-radius-small: 3px !default;
+$border-radius-base: 6px !default;
+$border-radius-large: 6px !default;
+//** Global color for active items (e.g., navs or dropdowns).
+$component-active-color: #fff !default;
+//** Global background color for active items (e.g., navs or dropdowns).
+$component-active-bg: $brand-primary !default;
+//** Width of the `border` for generating carets that indicate dropdowns.
+$caret-width-base: 4px !default;
+//** Carets increase slightly in size for larger components.
+$caret-width-large: 5px !default;
+//== Tables
+//** Padding for `<th>`s and `<td>`s.
+$table-cell-padding: 8px !default;
+//** Padding for cells in `.table-condensed`.
+$table-condensed-cell-padding: 5px !default;
+//** Default background color used for all tables.
+$table-bg: transparent !default;
+//** Background color used for `.table-striped`.
+$table-bg-accent: #f9f9f9 !default;
+//** Background color used for `.table-hover`.
+$table-bg-hover: #f5f5f5 !default;
+$table-bg-active: $table-bg-hover !default;
+//** Border color for table and cell borders.
+$table-border-color: #ddd !default;
+//== Buttons
+//
+//## For each of Bootstrap's buttons, define text, background and border color.
+$btn-font-weight: normal !default;
+$btn-default-color: #333 !default;
+$btn-default-bg: #fff !default;
+$btn-default-border: #ccc !default;
+$btn-primary-color: #fff !default;
+$btn-primary-bg: $brand-primary !default;
+$btn-primary-border: darken($btn-primary-bg, 5%) !default;
+$btn-success-color: #fff !default;
+$btn-success-bg: $brand-success !default;
+$btn-success-border: darken($btn-success-bg, 5%) !default;
+$btn-info-color: #fff !default;
+$btn-info-bg: $brand-info !default;
+$btn-info-border: darken($btn-info-bg, 5%) !default;
+$btn-warning-color: #fff !default;
+$btn-warning-bg: $brand-warning !default;
+$btn-warning-border: darken($btn-warning-bg, 5%) !default;
+$btn-danger-color: #fff !default;
+$btn-danger-bg: $brand-danger !default;
+$btn-danger-border: darken($btn-danger-bg, 5%) !default;
+$btn-sub-color: #fff !default;
+$btn-sub-bg: #1790FF !default;
+$btn-sub-border: darken($btn-sub-bg, 5%) !default;
+$btn-gray-color: #fff !default;
+$btn-gray-bg: $brand-gray !default;
+$btn-gray-border: darken($btn-gray-bg, 5%) !default;
+$btn-enable-color: #fff !default;
+$btn-enable-bg: $brand-enable !default;
+$btn-enable-border: darken($btn-enable-bg, 5%) !default;
+$btn-delete-color: #fff !default;
+$btn-delete-bg: $brand-delete !default;
+$btn-delete-border: darken($btn-delete-bg, 5%) !default;
+$btn-link-disabled-color: $gray-light !default;
+// Allows for customizing button radius independently from global border radius
+$btn-border-radius-base: $border-radius-base !default;
+$btn-border-radius-large: $border-radius-large !default;
+$btn-border-radius-small: $border-radius-small !default;
+//== Dropdown
+//** Background for the dropdown menu.
+$dropdown-bg: #fff !default;
+//** Dropdown menu `border-color`.
+$dropdown-border: rgba(0, 0, 0, .15) !default;
+//** Divider color for between dropdown items.
+$dropdown-divider-bg: #e5e5e5 !default;
+//** Dropdown link text color.
+$dropdown-link-color: $gray-dark !default;
+//** Hover color for dropdown links.
+$dropdown-link-hover-color: darken($gray-dark, 5%) !default;
+//** Hover background for dropdown links.
+$dropdown-link-hover-bg: #f5f5f5 !default;
+//** Active dropdown menu item text color.
+$dropdown-link-active-color: $component-active-color !default;
+//** Active dropdown menu item background color.
+$dropdown-link-active-bg: $component-active-bg !default;
+//** Disabled dropdown menu item background color.
+$dropdown-link-disabled-color: $gray-light !default;
+//** Text color for headers within dropdown menus.
+$dropdown-header-color: $gray-light !default;
+//== Form states and alerts
+//
+//## Define colors for form feedback states and, by default, alerts.
+$state-success-text: #66c73b !default;
+$state-success-bg: #dff0d8 !default;
+$state-success-border: darken(adjust-hue($state-success-bg, -10), 5%) !default;
+$state-info-text: #31708f !default;
+$state-info-bg: #d9edf7 !default;
+$state-info-border: darken(adjust-hue($state-info-bg, -10), 7%) !default;
+$state-warning-text: #8a6d3b !default;
+$state-warning-bg: #fcf8e3 !default;
+$state-warning-border: darken(adjust-hue($state-warning-bg, -10), 5%) !default;
+$state-danger-text: #ed6853 !default;
+$state-danger-bg: #f2dede !default;
+$state-danger-border: darken(adjust-hue($state-danger-bg, -10), 5%) !default;
+//== Code
+$code-color: #c7254e !default;
+$code-bg: #f9f2f4 !default;
+$kbd-color: #fff !default;
+$kbd-bg: #333 !default;
+$pre-bg: #f5f5f5 !default;
+$pre-color: $gray-dark !default;
+$pre-border-color: #ccc !default;
+//== Type
+//** Text muted color
+$text-muted: $gray-light !default;
+//** Abbreviations and acronyms border color
+$abbr-border-color: $gray-light !default;
+//** Headings small color
+$headings-small-color: $gray-light !default;
+//** Blockquote small color
+$blockquote-small-color: $gray-light !default;
+//** Blockquote font size
+$blockquote-font-size: ($font-size-base * 1.25) !default;
+//** Blockquote border color
+$blockquote-border-color: $gray-lighter !default;
+$cursor-disabled: not-allowed !default;
+//== Pagination
+$pagination-color: $link-color !default;
+$pagination-bg: #fff !default;
+$pagination-border: #ddd !default;
+$pagination-hover-color: $link-hover-color !default;
+$pagination-hover-bg: $gray-lighter !default;
+$pagination-hover-border: #ddd !default;
+$pagination-active-color: #fff !default;
+$pagination-active-bg: $brand-primary !default;
+$pagination-active-border: $brand-primary !default;
+$pagination-disabled-color: $gray-light !default;
+$pagination-disabled-bg: #fff !default;
+$pagination-disabled-border: #ddd !default;
+//== Badges
+$badge-color: #fff !default;
+$badge-bg: $gray-light !default;
+$badge-font-weight: bold !default;
+$badge-line-height: 1 !default;
+$badge-border-radius: 10px !default;
+//== util
+$base-line-color: #000;
+//base radius
+$base-radius:4px;

@@ -1,0 +1,53 @@
+@charset "utf-8";
+// 重置样式
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    color: $text-color;
+    background-color: $body-bg;
+}
+
+// Reset fonts for relevant elements
+// 重置一些不能继承属性元素的字体
+input,
+button,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+// a 标签
+// a {
+//     color: $link-color;
+//     text-decoration: none;
+//     &:hover,
+//     &:focus {
+//         color: $link-hover-color;
+//         text-decoration: $link-hover-decoration;
+//     }
+//     &:focus {
+//         @include tab-focus;
+//     }
+// }
+// 图片
+img {
+    vertical-align: middle;
+}
+
+[role="button"] {
+    cursor: pointer;
+}

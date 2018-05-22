@@ -1,0 +1,80 @@
+@charset "utf-8";
+
+// 功能类
+
+.fr {
+  float: right !important;
+}
+
+.fl {
+  float: left !important;
+}
+
+.text-inline {
+  @include text-inline;
+}
+
+.el-im {
+  min-width: 0 !important;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(00, 00, 00, 0.5);
+  border: none;
+  p {
+    color: #fff !important;
+  }
+  i {
+    display: none;
+  }
+}
+
+.flex-parent,
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  &.column {
+    flex-direction: column;
+  }
+  &.start {
+    justify-content: flex-start;
+  }
+  &.end {
+    justify-content: flex-end;
+  }
+  &.avg {
+    justify-content: space-around;
+  }
+  &.between {
+    justify-content: space-between;
+  }
+  &.wrap {
+    flex-wrap: wrap;
+  }
+}
+
+.nav-item {
+  display: flex;
+  .item {
+    @include flex-a;
+    height: 100%;
+    position: relative;
+    text-align: center;
+    &:not(:last-of-type):after {
+      content: "";
+      display: block;
+      position: absolute;
+      @include square(100%);
+      top: 0;
+      left: 0;
+      transform: scale(1, 0.6);
+      z-index: 1;
+      border-right: 1px solid $base-line-color;
+    }
+    > * {
+      z-index: 2;
+    }
+  }
+}

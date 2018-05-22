@@ -1,0 +1,26 @@
+@charset "utf-8";
+
+//各种border三角形
+
+@mixin trangle-up($size,$color) {
+    width: 0;
+    height: 0;
+    border-left: $size/2 solid transparent;
+    border-right: $size/2 solid transparent;
+    border-bottom: $size solid $color;
+}
+@mixin trangle-bottom($size, $color) {
+  width: 0;
+  height: 0;
+  border-left: $size/2 solid transparent;
+  border-right: $size/2 solid transparent;
+  border-top: $size solid $color;
+}
+
+@mixin trangle-top-right($size, $color) {
+  width: 0;
+  height: 0;
+  border-left: $size solid transparent;
+  border-top: $size solid $color;
+}
+
