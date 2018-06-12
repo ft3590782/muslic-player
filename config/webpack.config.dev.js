@@ -71,7 +71,7 @@ module.exports = {
 		// We placed these paths second because we want `node_modules` to "win"
 		// if there are any conflicts. This matches Node resolution mechanism.
 		// https://github.com/facebookincubator/create-react-app/issues/253
-		modules: [ 'node_modules', paths.appNodeModules ].concat(
+		modules: ['node_modules', paths.appNodeModules].concat(
 			// It is guaranteed to exist because we tweak it in `env.js`
 			process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
 		),
@@ -81,7 +81,7 @@ module.exports = {
 		// https://github.com/facebookincubator/create-react-app/issues/290
 		// `web` extension prefixes have been added for better support
 		// for React Native Web.
-		extensions: [ '.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx' ],
+		extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
 		alias: {
 			// Support React Native Web
 			// https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
@@ -93,7 +93,7 @@ module.exports = {
 			// To fix this, we prevent you from importing files out of src/ -- if you'd like to,
 			// please link the files into your node_modules/ and let module-resolution kick in.
 			// Make sure your source files are compiled, as they will not be processed in any way.
-			new ModuleScopePlugin(paths.appSrc, [ paths.appPackageJson ])
+			new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson])
 		]
 	},
 	module: {
@@ -115,15 +115,13 @@ module.exports = {
 			{
 				test: /\.(js|jsx|mjs)$/,
 				enforce: 'pre',
-				use: [
-					{
-						options: {
-							formatter: eslintFormatter,
-							eslintPath: require.resolve('eslint')
-						},
-						loader: require.resolve('eslint-loader')
-					}
-				],
+				use: [{
+					options: {
+						formatter: eslintFormatter,
+						eslintPath: require.resolve('eslint')
+					},
+					loader: require.resolve('eslint-loader')
+				}],
 				include: paths.appSrc
 			},
 			{
@@ -135,7 +133,7 @@ module.exports = {
 					// smaller than specified limit in bytes as data URLs to avoid requests.
 					// A missing `test` is equivalent to a match.
 					{
-						test: [ /\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/ ],
+						test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
 						loader: require.resolve('url-loader'),
 						options: {
 							limit: 10000,
@@ -151,7 +149,7 @@ module.exports = {
 							// This is a feature of `babel-loader` for webpack (not Babel itself).
 							// It enables caching results in ./node_modules/.cache/babel-loader/
 							// directory for faster rebuilds.
-							cacheDirectory: true
+							cacheDirectory: true,
 						}
 					},
 					// "postcss" loader applies autoprefixer to our CSS.
@@ -202,7 +200,7 @@ module.exports = {
 						// its runtime that would otherwise processed through "file" loader.
 						// Also exclude `html` and `json` extensions so they get processed
 						// by webpacks internal loaders.
-						exclude: [ /\.(js|jsx|mjs)$/, /\.html$/, /\.json$/, /\.scss$/ ],
+						exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/, /\.scss$/],
 						loader: require.resolve('file-loader'),
 						options: {
 							name: 'static/media/[name].[hash:8].[ext]'

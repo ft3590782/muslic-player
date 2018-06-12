@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 body,
 html {
 	@include square(100%);
@@ -5,6 +9,11 @@ html {
 	overflow-y: auto; // -webkit-overflow-scrolling: touch;
 	font-size: 14px;
 	background-color: $bg-color;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
 }
 
 input[type=text],

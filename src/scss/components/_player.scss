@@ -1,12 +1,22 @@
 .player-wrap {
-    .song-name {
-        font-size: 24px;
-    }
-    .song-songer {
-        font-size: 14px;
-        color: $brand-sub;
+    height: 140px;
+    background-color: #fff;
+    border-top: 1px solid $border-color;
+    .song-info {
+        padding-top: 10px;
+        .song-name {
+            min-height: 32px;
+            font-size: 24px;
+        }
+        .song-songer {
+            padding: 5px 0;
+            min-height: 20px;
+            font-size: 14px;
+            color: $brand-sub;
+        }
     }
     .song-geci {
+        min-height: 80px;
         color: $brand-sub;
         ul {
             li {
@@ -49,12 +59,16 @@
                 margin-left: -5px;
                 border-radius: 100%;
                 background: #fff;
+                border: 1px solid $brand-enable;
                 transform: translateZ(0);
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 cursor: pointer;
                 .progress-dot-dot {
                     border-radius: 100%;
-                    width: 8px;
-                    height: 8px;
+                    width: 10px;
+                    height: 10px;
                     background: $brand-enable;
                 }
             }
@@ -63,6 +77,10 @@
     .main-option {
         .iconfont {
             font-size: 24px;
+            &.icon-qianjin,
+            &.icon-houtui {
+                font-size: 20px;
+            }
         }
     }
 }

@@ -1,0 +1,32 @@
+.play-list-wrap {
+    height: 100%;
+    overflow-y: auto;
+    border-top: 1px solid $border-color;
+    background-color: #fff;
+    .play-list {
+        padding: 5px 0;
+        .item {
+            padding: 10px 0;
+            width: calc(100% - 20px);
+            margin: 0 10px;
+            border-bottom: 1px solid $border-color;
+            &:last-child {
+                border-bottom: 0 none;
+            }
+            .song-info {
+                flex: 1 1 auto;
+                line-height: 1.6;
+                .song-name {
+                    font-size: 20px;
+                }
+            }
+            .song-option {
+                flex: 0 0 50px;
+                text-align: right;
+                .iconfont {
+                    font-size: 24px;
+                }
+            }
+        }
+    }
+}

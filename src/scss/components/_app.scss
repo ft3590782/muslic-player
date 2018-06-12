@@ -1,0 +1,40 @@
+.app-wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    .icon-input {
+        padding: 0 10px;
+        background: #e3e3e3;
+        border-radius: 30px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .iconfont {}
+        .start-icon {
+            flex: 0 0 20px;
+        }
+        .input {
+            flex: 1 1 auto;
+            border: 0 none;
+        }
+        .end-icon {
+            flex: 0 0 20px;
+            justify-self: end;
+        }
+    }
+    .router-wrap {
+        height: calc(100% - 140px);
+    }
+    .app-head {
+        //头部固定
+        height: 55px;
+        position: relative;
+        z-index: 10;
+    }
+    .app-body {
+        //content
+        height: calc(100% - 55px);
+        position: relative;
+        z-index: 1;
+    }
+}
