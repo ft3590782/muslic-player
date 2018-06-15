@@ -2,14 +2,17 @@ import React from 'react';
 import timeHelper from '../util/timeHelper';
 
 let playTimer;
-let tempProgress = 0;
 let isMouseDown = false;
+let tempCurrentTime = 0;
+let audio, progreesBar;
 
 class Player extends React.Component {
   constructor() {
     super();
     this.state = {
+      playSong: null,
       currentTime: '00:00', //当前歌曲播放的时间
+      tempCurrentTime: '00:00', //临时当前歌曲播放的时间
       currentTotalTime: '00:00', //当前歌曲的总时间
       currentVolume: 0.5, //当前歌音量
       isVolume: true, //是否有声音
@@ -20,60 +23,65 @@ class Player extends React.Component {
     };
   }
   componentDidMount() {
+    audio = document.getElementById('myAudio');
+    window.myAudio = audio;
+    progreesBar = document.getElementById('progressBar');
     let { currtList, currtIndex } = this.props.playlist;
     if (currtList.length && currtIndex >= 0) {
-      this.props.play(currtList[currtIndex]);
+      this.doPlay(currtIndex);
     }
   }
+
   componentWillUpdate(props, state) {
     // console.log('componentWillUpdate')
-
-    let audio = document.getElementById('myAudio');
-
-    if (state.playStatus) {
-      audio.play();
-    } else {
-      audio.pause();
-    }
+    // console.log(props)
+    // console.log(state.playStatus)
 
     audio.volume = state.currentVolume;
+  }
+
+  doPlay(index, isChangeIndex) {
+    let { currtList } = this.props.playlist;
+    this.props.play(currtList[index]);
+    isChangeIndex && this.props.changePlayIndex(index);
   }
 
   playNext() {
     let { currtList, currtIndex } = this.props.playlist;
     if (currtIndex + 1 < currtList.length) {
       currtIndex += 1;
-      console.log(currtIndex);
-      this.props.play(currtList[currtIndex]);
-      this.props.changePlayIndex(currtIndex);
+      this.doPlay(currtIndex, true);
+    } else {
+      currtIndex = 0;
+      this.doPlay(currtIndex, true);
     }
     // props.play(currtList[currtIndex])
   }
 
   playPrev() {
-    let { currtList, currtIndex } = this.props.playlist;
+    let { currtIndex } = this.props.playlist;
     // console.log(currtIndex)
     if (currtIndex > 0) {
       currtIndex -= 1;
-      console.log(currtIndex);
-      this.props.play(currtList[currtIndex]);
-      this.props.changePlayIndex(currtIndex);
+      this.doPlay(currtIndex);
     }
     // props.play(currtList[currtIndex])
   }
 
-  play() {
-    this.setState({ playStatus: true });
-    this.updatePlayStatus();
+  play(e) {
+    this.setState({ playStatus: true, autoPlay: true });
+    audio.play();
   }
 
   ended() {
     this.playNext();
   }
 
-  pause() {
-    this.setState({ playStatus: false });
-    clearTimeout(playTimer);
+  pause(e) {
+    if (!audio.paused) {
+      audio.pause();
+      this.setState({ playStatus: false });
+    }
   }
   updateVolume(isVolume) {
     if (isVolume) {
@@ -89,64 +97,65 @@ class Player extends React.Component {
     this.setState({ currentVolume: volume });
   }
 
-  printLog() {
-    console.log(new Date().getTime() + '   ');
-  }
-
   updatePlayStatus() {
     //更新当前歌曲总时间
-    let audio = document.getElementById('myAudio');
-    this.setState({ currentTime: timeHelper.formatTime(audio.currentTime) });
-    this.setState({ currentTotalTime: timeHelper.formatTime(audio.duration) });
-    let _progress = audio.currentTime / audio.duration * 100;
+    const newState = {
+      currentTime: timeHelper.formatTime(audio.currentTime),
+      currentTotalTime: timeHelper.formatTime(audio.duration)
+    };
+    const _progress = audio.currentTime / audio.duration * 100;
 
     if (!this.state.progressLocked) {
-      this.setState({ progress: _progress });
+      newState.progress = _progress;
     }
-
-    playTimer = setTimeout(() => {
-      this.updatePlayStatus();
-    }, 250);
+    this.setState(newState);
+    if (this.state.playStatus) {
+      playTimer = setTimeout(() => {
+        this.updatePlayStatus();
+      }, 500);
+    }
   }
   canPlay() {
-    let audio = document.getElementById('myAudio');
+    this.setState({
+      currentTime: timeHelper.formatTime(audio.currentTime),
+      currentTotalTime: timeHelper.formatTime(audio.duration)
+    });
 
-    this.setState({ currentTime: timeHelper.formatTime(audio.currentTime) });
-    this.setState({ currentTotalTime: timeHelper.formatTime(audio.duration) });
     if (this.state.autoPlay) {
       this.play();
     }
   }
 
   touchstart(event) {
+    console.log('touchstart');
     if (!this.props.playing.playfile || this.props.playing.playfile === '') {
       return false;
     }
-    this.setState({ progressLocked: true });
+    this.setState({
+      tempCurrentTime: timeHelper.formatTime(audio.currentTime),
+      progressLocked: true
+    });
   }
 
   touchmove(event) {
+    console.log('touchmove');
     if (this.state.progressLocked) {
       if (!this.props.playing.playfile || this.props.playing.playfile === '') {
         return false;
       }
 
-      let audio = document.getElementById('myAudio');
-      let progreesBar = document.getElementById('progressBar');
       let fixprogress =
         (event.touches[0].clientX - progreesBar.offsetLeft) /
         progreesBar.offsetWidth;
       if (fixprogress < 0) fixprogress = 0;
       if (fixprogress > 1) fixprogress = 1;
-      tempProgress = fixprogress;
-      audio.currentTime = audio.duration * tempProgress;
-      this.setState({ currentTime: timeHelper.formatTime(audio.currentTime) });
-      let _progress = audio.currentTime / audio.duration * 100;
-      this.setState({ progress: _progress });
+      this.setNewTimeAndProgress(fixprogress);
     }
   }
 
   touchend(event) {
+    console.log('touchend');
+    audio.currentTime = tempCurrentTime;
     this.setState({ progressLocked: false });
   }
 
@@ -154,27 +163,39 @@ class Player extends React.Component {
     if (!this.props.playing.playfile || this.props.playing.playfile === '') {
       return false;
     }
+    this.setState({
+      tempCurrentTime: timeHelper.formatTime(audio.currentTime),
+      progressLocked: true
+    });
     isMouseDown = true;
   }
 
   mousemove(event) {
     if (isMouseDown) {
-      console.log('x' + event.pageX + ',y' + event.pageY);
-      let audio = document.getElementById('myAudio');
-      let progreesBar = document.getElementById('progressBar');
+      // console.log('x' + event.pageX + ',y' + event.pageY);
       let fixprogress =
         (event.pageX - progreesBar.offsetLeft) / progreesBar.offsetWidth;
       if (fixprogress < 0) fixprogress = 0;
       if (fixprogress > 1) fixprogress = 1;
-      tempProgress = fixprogress;
-      audio.currentTime = audio.duration * tempProgress;
-      this.setState({ currentTime: timeHelper.formatTime(audio.currentTime) });
-      let _progress = audio.currentTime / audio.duration * 100;
-      this.setState({ progress: _progress });
+      this.setNewTimeAndProgress(fixprogress);
     }
   }
   mouseup(event) {
-    isMouseDown = false;
+    if (isMouseDown) {
+      audio.currentTime = tempCurrentTime;
+      this.setState({ progressLocked: false });
+      isMouseDown = false;
+    }
+  }
+
+  setNewTimeAndProgress(tempProgress) {
+    tempCurrentTime = audio.duration * tempProgress;
+    let _progress = tempCurrentTime / audio.duration * 100;
+    this.setState({
+      progress: _progress,
+      currentTime: timeHelper.formatTime(tempCurrentTime),
+      tempCurrentTime: timeHelper.formatTime(tempCurrentTime)
+    });
   }
 
   render() {
@@ -187,8 +208,8 @@ class Player extends React.Component {
       playButton = (
         <div
           className="stop-btn"
-          onClick={() => {
-            this.pause();
+          onClick={e => {
+            this.pause(e);
           }}
         >
           <i className="iconfont icon-bofangzanting" />
@@ -198,8 +219,8 @@ class Player extends React.Component {
       playButton = (
         <div
           className="play-btn"
-          onClick={() => {
-            this.play();
+          onClick={e => {
+            this.play(e);
           }}
         >
           <i className="iconfont icon-bofang" />
@@ -264,7 +285,11 @@ class Player extends React.Component {
           // </div>
         }
         <div className="progress-wrap flex-parent center">
-          <div className="start-time">{this.state.currentTime}</div>
+          <div className="start-time">
+            {this.state.progressLocked
+              ? this.state.tempCurrentTime
+              : this.state.currentTime}
+          </div>
           <div id="progressBar" className="progress-bar-bg">
             <div
               className="progress-bar"
@@ -324,10 +349,10 @@ class Player extends React.Component {
             this.canPlay();
           }}
           onPlay={() => {
-            this.play();
+            this.updatePlayStatus();
           }}
           onPause={() => {
-            this.pause();
+            playTimer && clearTimeout(playTimer);
           }}
           onEnded={() => {
             this.ended();

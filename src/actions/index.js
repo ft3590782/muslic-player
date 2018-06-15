@@ -31,6 +31,12 @@ export const getPlayList = () => ({
   type: 'GET_PLAY_LIST'
 });
 
+export const updatePlayList = (item, index) => ({
+  type: 'UPDATE_PLAY_LIST',
+  item: item,
+  index: index
+});
+
 export const updateSearchList = list => ({
   type: 'UPDATE_SEARCH_LIST',
   list: list
