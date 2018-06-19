@@ -7,7 +7,13 @@ const playList = (
   action
 ) => {
   switch (action.type) {
-    case 'ADD_TO_LIST':
+    case 'REMOVE_SONG':
+      state.currtList.splice(action.index, 1);
+      return storeHelper.setLocalStore('playlist', {
+        currtIndex: state.currtIndex,
+        currtList: [...state.currtList]
+      });
+    case 'ADD_SONG':
       return storeHelper.setLocalStore('playlist', {
         currtIndex: state.currtIndex,
         currtList: [
@@ -53,7 +59,7 @@ const playList = (
         });
       }
 
-    case 'ADD_TO_LIST_BATCH':
+    case 'ADD_SONG_BATCH':
       return storeHelper.setLocalStore('playlist', {
         currtIndex: state.currtIndex,
         currtList: [...state.currtList, ...action.songList]

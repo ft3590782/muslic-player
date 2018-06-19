@@ -2,7 +2,7 @@ import React from 'react';
 
 class PlayList extends React.Component {
   render() {
-    const { playlist, play } = this.props;
+    const { playlist, play, removeSong } = this.props;
     return (
       <div className="play-list-wrap">
         <ul className="play-list">
@@ -23,10 +23,14 @@ class PlayList extends React.Component {
                     {item.singerName}-{item.albumName}
                   </p>
                 </div>
-                <div className="song-option">
+                <div className="song-option flex-parent end">
                   <i
                     className="iconfont icon-bofang-bai"
                     onClick={() => play(item, index)}
+                  />
+                  <i
+                    className="iconfont icon-close"
+                    onClick={() => removeSong(index)}
                   />
                 </div>
               </li>

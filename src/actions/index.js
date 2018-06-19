@@ -7,8 +7,8 @@ export const changePlayIndex = index => ({
   index: index
 });
 
-export const addToList = song => ({
-  type: 'ADD_TO_LIST',
+export const addSong = song => ({
+  type: 'ADD_SONG',
   id: song.id,
   songName: song.songName,
   albumName: song.albumName,
@@ -17,13 +17,18 @@ export const addToList = song => ({
   url: song.url
 });
 
+export const removeSong = index => ({
+  type: 'REMOVE_SONG',
+  index: index
+});
+
 export const addSearchToList = song => ({
   type: 'ADD_SEARCH_TO_LIST',
   song: song
 });
 
-export const addToListBatch = list => ({
-  type: 'ADD_TO_LIST_BATCH',
+export const addSongBatch = list => ({
+  type: 'ADD_SONG_BATCH',
   songList: list
 });
 

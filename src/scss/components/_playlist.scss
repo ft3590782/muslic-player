@@ -25,6 +25,13 @@
                 text-align: right;
                 .iconfont {
                     font-size: 24px;
+                    display: block;
+                }
+                .icon-close {
+                    font-size: 18px;
+                }
+                i+i {
+                    margin-left: 10px;
                 }
             }
         }

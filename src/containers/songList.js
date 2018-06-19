@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addToList } from '../actions';
+import { addSong } from '../actions';
 
 import songList from '../components/songList';
 const mapStateToProps = state => ({
@@ -10,7 +10,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onAddToPlayClick: item => {
       // console.log(item);
-      dispatch(addToList(item));
+      dispatch(addSong(item));
     }
   };
 };
