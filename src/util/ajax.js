@@ -1,44 +1,8 @@
-// import fetchJsonp from 'fetch-jsonp'
-
-// fetch对中文返回的jsonp支持不够友好,无法解决乱码问题,改用jquery.ajax
-// async function doFetch(request) {
-
-//     if (Object.prototype.toString.call(request, {headers: {'Content-Type': 'application/x-javascript; charset=utf-8'}}) === '[object String]' && request.type.toLowerCase() !== 'jsonp') {
-//         return await fetch(request).then(res => {
-//             return res
-//         }).catch(error => {
-//             return error
-//         })
-//     } else {
-//         return await fetchJsonp(request.url, {jsonpCallbackFunction: request.callback}).then(res => {
-//             return res.json()
-//         })
-//     }
-
-// }
-
-// export default {
-//     // async doFetch()
-//     async getAllSongs() {
-//         return await doFetch({url: 'http://music.qq.com/musicbox/shop/v3/data/hit/hit_all.js', type: 'jsonp', callback: 'JsonCallback'})
-//     },
-//     async getNewSongs() {
-//         return await doFetch({url: 'http://music.qq.com/musicbox/shop/v3/data/hit/hit_newsong.js', type: 'jsonp', callback: 'JsonCallback'})
-//     }
-// }
-
 import { ajax } from 'jquery';
 
 const doAjax = request => {
   return new Promise((resolve, reject) => {
     let _request = {
-      //  type: "get",
-      // async: false,
-      // url: "http://music.qq.com/musicbox/shop/v3/data/hit/hit_newsong.js",
-      // dataType: "jsonp",
-      // jsonp: "callback",
-      // jsonpCallback: "JsonCallback",
-      // scriptCharset: 'GBK', //设置编码，否则会乱码
       success: function(data) {
         resolve(data);
       },
@@ -67,11 +31,6 @@ export default {
     });
   },
   async getNewSongs() {
-    // return await doFetch({
-    //     url: 'http://music.qq.com/musicbox/shop/v3/data/hit/hit_newsong.js',
-    //     type: 'jsonp',
-    //     callback: 'JsonCallback'
-    // })
     return await doAjax({
       type: 'jsonp',
       async: false,
@@ -92,7 +51,6 @@ export default {
       dataType: 'jsonp',
       jsonp: 'callback',
       jsonpCallback: 'callback'
-      // scriptCharset: 'GBK' //设置编码，否则会乱码
     });
   },
   async getVkey(mid) {
@@ -107,11 +65,12 @@ export default {
       dataType: 'jsonp',
       jsonp: 'callback',
       jsonpCallback: 'callback'
-      // scriptCharset: 'GBK' //设置编码，否则会乱码
     });
   },
   async getFile(filename, vkey) {
-    return await `http://dl.stream.qqmusic.qq.com/${filename}?vkey=${vkey}
+    return await `${
+      document.location.protocol
+    }//dl.stream.qqmusic.qq.com/${filename}?vkey=${vkey}
 			&guid=3655047200&fromtag=66`;
   }
 };

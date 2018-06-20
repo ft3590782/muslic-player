@@ -7,8 +7,11 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 import moment from 'moment';
+import VConsole from 'vconsole';
 
 import './scss/main.scss';
+
+let vConsole = new VConsole();
 
 window.moment = moment;
 // console.log(window.moment());
