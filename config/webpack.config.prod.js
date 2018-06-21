@@ -269,11 +269,14 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
+        drop_console: false, //关闭客户端打印console
+        collapse_vars: true,
+        reduce_vars: true
         // Disabled because of an issue with Uglify breaking seemingly valid code:
         // https://github.com/facebookincubator/create-react-app/issues/2376
         // Pending further investigation:
         // https://github.com/mishoo/UglifyJS2/issues/2011
-        comparisons: false,
+        // comparisons: false,
       },
       mangle: {
         safari10: true,

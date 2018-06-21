@@ -1,6 +1,7 @@
 export default {
   getLocalStore(name) {
     let obj = window.localStorage.getItem(name);
+    console.log(obj);
     if (obj && obj !== '') {
       obj = JSON.parse(obj);
     }

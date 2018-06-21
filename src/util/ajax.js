@@ -3,11 +3,18 @@ import { ajax } from 'jquery';
 const doAjax = request => {
   return new Promise((resolve, reject) => {
     let _request = {
+      beforeSend: function() {
+        window.loader.open();
+      },
       success: function(data) {
         resolve(data);
       },
-      error: function() {
-        alert('fail');
+      error: function(error) {
+        window.loader.close();
+        alert(JSON.stringify(error));
+      },
+      complete: function() {
+        window.loader.close();
       }
     };
 

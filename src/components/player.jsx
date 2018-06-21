@@ -1,10 +1,17 @@
 import React from 'react';
 import timeHelper from '../util/timeHelper';
-
 let playTimer;
 let isMouseDown = false;
 let tempCurrentTime = 0;
 let audio, progreesBar;
+
+function once(dom, event, callback) {
+  var handle = function() {
+    callback();
+    dom.removeEventListener(event, handle);
+  };
+  dom.addEventListener(event, handle);
+}
 
 class Player extends React.Component {
   constructor() {
@@ -24,6 +31,14 @@ class Player extends React.Component {
   }
   componentDidMount() {
     audio = document.getElementById('myAudio');
+    if (/i(Phone|P(o|a)d)/.test(navigator.userAgent)) {
+      once(document, 'touchstart', () => {
+        audio.touchstart = true;
+        audio.play();
+        audio.pause();
+        return false;
+      });
+    }
     window.myAudio = audio;
     progreesBar = document.getElementById('progressBar');
     let { currtList, currtIndex } = this.props.playlist;

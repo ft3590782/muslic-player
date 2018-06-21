@@ -10,6 +10,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     play: async (song, index) => {
+      console.log('play');
       let file = await playHelper.getFile(song);
       song.playfile = file;
       dispatch(updatePlayList(song, index));

@@ -3,6 +3,7 @@ import React from 'react';
 class PlayList extends React.Component {
   render() {
     const { playlist, play, removeSong } = this.props;
+
     return (
       <div className="play-list-wrap">
         <ul className="play-list">
